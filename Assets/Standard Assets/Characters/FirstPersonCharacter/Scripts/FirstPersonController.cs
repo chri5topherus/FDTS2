@@ -47,9 +47,11 @@ namespace UnityStandardAssets.Characters.FirstPerson
         {
             m_CharacterController = GetComponent<CharacterController>();
             m_Camera = Camera.main;
-            m_OriginalCameraPosition = m_Camera.transform.localPosition;
-            m_FovKick.Setup(m_Camera);
-            m_HeadBob.Setup(m_Camera, m_StepInterval);
+			if (m_Camera != null) {
+				m_OriginalCameraPosition = m_Camera.transform.localPosition;
+				m_FovKick.Setup (m_Camera);
+				m_HeadBob.Setup (m_Camera, m_StepInterval);
+			}
             m_StepCycle = 0f;
             m_NextStep = m_StepCycle/2f;
             m_Jumping = false;
@@ -237,7 +239,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
         private void RotateView()
         {
-            m_MouseLook.LookRotation (transform, m_Camera.transform);
+			if(m_Camera != null) 
+            	m_MouseLook.LookRotation (transform, m_Camera.transform);
         }
 
 
